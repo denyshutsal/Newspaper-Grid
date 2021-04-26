@@ -1,0 +1,205 @@
+/* stylelint-disable */
+
+// Responsive And Fluid Typography
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(
+          #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+/*
+  This mixin can be used to set the object-fit:
+  @include object-fit(contain);
+  or object-fit and object-position:
+  @include object-fit(cover, top);
+*/
+@mixin object-fit($fit: fill, $position: null) {
+  -o-object-fit: $fit;
+  object-fit: $fit;
+  @if $position {
+    -o-object-position: $position;
+    object-position: $position;
+    font-family: "object-fit: #{$fit}; object-position: #{$position}";
+  } @else {
+    font-family: "object-fit: #{$fit}";
+  }
+}
+
+// reset ul, ol
+
+@mixin reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+// reset links
+
+@mixin clear-link {
+  overflow: hidden;
+  text-decoration: none;
+}
+
+// centering
+
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == "y" {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $position == "x" {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $position == "xy" {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// flex-box
+
+@mixin flex-row-wrap-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-row-nowrap-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column-nowrap-center {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+// media queries
+
+@mixin min-width($size) {
+  @if $size == "sm" {
+    @media (min-width: $sm) {
+      @content;
+    }
+  } @else if $size == "md" {
+    @media (min-width: $md) {
+      @content;
+    }
+  } @else if $size == "lg" {
+    @media (min-width: $lg) {
+      @content;
+    }
+  } @else if $size == "xl" {
+    @media (min-width: $xl) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+@mixin max-width($size) {
+  @if $size == "sm" {
+    @media (max-width: $sm) {
+      @content;
+    }
+  } @else if $size == "md" {
+    @media (max-width: $md) {
+      @content;
+    }
+  } @else if $size == "lg" {
+    @media (max-width: $lg) {
+      @content;
+    }
+  } @else if $size == "xl" {
+    @media (max-width: $xl) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+}
+
+// rem converter
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size-px-to-rem($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// line-height (px -> unitless value)
+
+@mixin line-height-px-to-unitless($font-size, $line-height) {
+  line-height: ($line-height / $font-size);
+}
+
+// background normal
+
+@mixin background($color, $image-name, $repeat, $position, $size) {
+  background-color: $color;
+  background-image: url($img-path + $image-name + ".jpg");
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+
+// background normal and retina
+
+@mixin background-with-retina($color, $image-name, $repeat, $position, $size) {
+  background-color: $color;
+  background-image: url($img-path + $image-name + ".jpg");
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+  @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
+    background-image: url($img-path + $image-name + "@2x.jpg");
+  }
+}
+
+// double-border
+
+@mixin double-border {
+  border: 2px solid transparent;
+  box-shadow: inset 0 0 0 1px var(--black);
+  outline: 3px solid var(--black);
+}

@@ -1,0 +1,14 @@
+.content {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+
+  @include min-width(md) {
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)) 23%;
+  }
+
+  @include min-width(lg) {
+    grid-template-columns: repeat(auto-fit, minmax(162.5px, 1fr));
+  }
+}

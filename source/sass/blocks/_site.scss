@@ -1,0 +1,8 @@
+.site {
+  display: grid;
+  width: 100%;
+  max-width: 1135px;
+  margin: 0 auto;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}

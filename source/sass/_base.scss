@@ -1,0 +1,328 @@
+/* ==========================================================================
+base
+========================================================================== */
+
+// Add border box sizing in all browsers (opinionated).
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+/**
+ * 1. Use the default cursor in all browsers (opinionated).
+ * 3. Use a 4-space tab width in all browsers (opinionated).
+ * 4. Remove the grey highlight on links in iOS (opinionated).
+ * 5. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ * 6. Breaks words to prevent overflow in all browsers (opinionated).
+ */
+
+body {
+  min-height: 100%;
+  padding: 64px 32px;
+  background-color: #fff;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/paper_fibers.png);
+  background-repeat: repeat;
+  break-inside: avoid;
+  color: $color-base;
+  cursor: default; /* 1 */
+  font-family: $font-base;
+  font-size: $font-size-base;
+  font-style: normal;
+  font-weight: $font-weight-base;
+  line-height: $line-height-base;
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  -webkit-tap-highlight-color: transparent /* 4 */;
+  text-align: justify;
+  -ms-text-size-adjust: 100%; /* 5 */
+  -webkit-text-size-adjust: 100%; /* 5 */
+  word-break: break-word; /* 6 */
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border: 1px solid $color-base;
+  filter: grayscale(95%);
+  font-family: "object-fit: cover;"; /* stylelint-disable-line */
+  object-fit: cover;
+  transition: 0.3s ease;
+}
+
+// .stretched-link::after {
+//   position: absolute;
+//   z-index: 1;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   background-color: rgba(0, 0, 0, 0);
+//   content: '';
+//   pointer-events: auto;
+// }
+
+a {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+
+img:hover,
+a:hover img {
+  cursor: pointer;
+  filter: none;
+}
+
+// Screen reader only
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+// Always hide an element with the `hidden` HTML attribute (from PureCSS).
+// Needed for proper display in IE 10-.
+
+[hidden] {
+  display: none !important;
+}
+
+// https://css-tricks.com/introduction-reduced-motion-media-query/
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Future-proof rule: in browsers that support :focus-visible, suppress the focus outline
+// on elements that programmatically receive focus but wouldn't normally show a visible
+// focus outline. In general, this would mean that the outline is only applied if the
+// interaction that led to the element receiving programmatic focus was a keyboard interaction,
+// or the browser has somehow determined that the user is primarily a keyboard user and/or
+// wants focus outlines to always be presented.
+
+// See https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+// and https://developer.paciellogroup.com/blog/2018/03/focus-visible-and-backwards-compatibility/
+
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+// Content grouping
+// 1. Add the correct box sizing in Firefox.
+
+hr {
+  box-sizing: content-box; // 1
+}
+
+// Abbreviations
+// 1. Duplicate behavior to the data-* attribute for our tooltip plugin
+// 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+// 3. Add explicit cursor to indicate changed behavior.
+// 4. Remove the bottom border in Firefox 39-.
+// 5. Prevent the text-decoration to be skipped.
+
+abbr[title],
+abbr[data-original-title] {
+  // 1
+  border-bottom: 0; // 4
+  cursor: help; // 3
+  text-decoration: underline; // 2
+  text-decoration: underline dotted; // 2
+  text-decoration-skip-ink: none; // 5
+}
+
+// Prevent `sub` and `sup` elements from affecting the line height in
+// all browsers.
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// Don't allow content to break outside
+
+pre {
+  overflow: auto;
+}
+
+// Matches default `<td>` alignment by inheriting from the `<body>`, or the
+// closest parent with a set `text-align`.
+
+th {
+  text-align: inherit;
+}
+
+// Allow labels to use `margin` for spacing.
+
+label {
+  display: inline-block;
+}
+
+// Remove the default `border-radius` that macOS Chrome adds.
+// Details at https://github.com/twbs/bootstrap/issues/24093
+
+button {
+  border-radius: 0;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0; // Remove the margin in Firefox and Safari
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
+
+// button::-moz-focus-inner,
+// [type='button']::-moz-focus-inner,
+// [type='reset']::-moz-focus-inner,
+// [type='submit']::-moz-focus-inner {
+//   padding: 0;
+//   border-style: none;
+// }
+
+// Remove the inheritance of word-wrap in Safari.
+// Details at https://github.com/twbs/bootstrap/issues/24990
+
+select {
+  word-wrap: normal;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  box-sizing: border-box; // 1. Add the correct box sizing in IE 10-
+  padding: 0; // 2. Remove the padding in IE 10-
+}
+
+fieldset {
+  // Browsers set a default `min-width: min-content;` on fieldsets,
+  // unlike e.g. `<div>`s, which have `min-width: 0;` by default.
+  // So we reset that to ensure fieldsets behave more like a standard block element.
+  // See https://github.com/twbs/bootstrap/issues/12359
+  // and https://html.spec.whatwg.org/multipage/#the-fieldset-and-legend-elements
+  min-width: 0;
+  // Reset the default outline behavior of fieldsets so they don't affect page layout.
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+// 1. Correct the text wrapping in Edge and IE.
+// 2. Correct the color inheritance from `fieldset` elements in IE.
+
+legend {
+  display: block;
+  width: 100%;
+  max-width: 100%; // 1
+  padding: 0;
+  color: inherit; // 2
+  line-height: inherit;
+  white-space: normal; // 1
+}
+
+// Correct the cursor style of increment and decrement buttons in Chrome.
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+output {
+  display: inline-block;
+}
+
+summary {
+  cursor: pointer;
+}
+
+// Debug tools
+
+// * {
+//   outline: 1px solid red;
+// }
+
+/* debug tools */
+// * {
+//   background-color: rgba(255, 0, 0, 0.2);
+// }
+
+// * * {
+//   background-color: rgba(0, 255, 0, 0.2);
+// }
+
+// * * * {
+//   background-color: rgba(0, 0, 255, 0.2);
+// }
+
+// * * * * {
+//   background-color: rgba(255, 0, 255, 0.2);
+// }
+
+// * * * * * {
+//   background-color: rgba(0, 255, 255, 0.2);
+// }
+
+// * * * * * * {
+//   background-color: rgba(255, 255, 0, 0.2);
+// }
+
+// * * * * * * * {
+//   background-color: rgba(255, 0, 0, 0.2);
+// }
+
+// * * * * * * * * {
+//   background-color: rgba(0, 255, 0, 0.2);
+// }
+
+// * * * * * * * * * {
+//   background-color: rgba(0, 0, 255, 0.2);
+// }
+
+/* if you forgot the 'alt' attribute */
+// img[alt=""],
+// img:not([alt]) {
+//   border: 5px dashed red;
+// }

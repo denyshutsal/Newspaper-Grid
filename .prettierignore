@@ -1,0 +1,7 @@
+~SNIPPETS/**/*
+~MODULES/*
+~TODO/*
+bower_components
+node_modules
+source/css/
+

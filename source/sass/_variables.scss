@@ -1,0 +1,50 @@
+// project
+$font-base: "EB Garamond", serif;
+$font-title: "Playfair Display", serif;
+$font-title-2: "Playfair Display SC", serif;
+$font-sans-serif: "Manrope", sans-serif;
+$font-size-base: 17.6px;
+$color-base: #1c1f33;
+$line-height-base: 1.3;
+$font-weight-base: 400;
+$gray: #eee;
+$gray-1: #ededed;
+$gray-2: #999;
+$gray-3: #666;
+
+$grid-gap: 1.2rem;
+
+// images path
+$img-path: "../img/";
+
+// retina
+$retina-dpi: 144dpi;
+$retina-dppx: 1.5dppx;
+
+// viewports
+// $xs: 0;
+$sm: 540px;
+$md: 700px;
+// $md: 660px;
+$lg: 1024px;
+$xl: 1025px;
+
+// bootstrap 4 viewports
+// $xs: 0;
+// $sm: 540px;
+// $md: 720px;
+// $lg: 960px;
+// $xl: 1140px;
+
+// https://www.w3counter.com/globalstats.php
+// Top 10 Screen Resolutions
+// 1	640x360	15.59%
+// 2	1366x768	10.74%
+// 3	1920x1080	6.05%
+// 4	760x360	5.35%
+// 5	1024x768	4.93%
+// 6	780x360	3.79%
+// 7	667x375	3.63%
+// 8	720x360	3.54%
+// 9	1536x864	2.56%
+// 10	896x414	2.37%
